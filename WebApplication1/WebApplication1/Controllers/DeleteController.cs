@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
 using System.Web.Http;
+using WebApplication1.Connect;
 
 namespace WebApplication1.Controllers
 {
@@ -16,9 +13,22 @@ namespace WebApplication1.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(string id)
+        public string deleteUser(string id)
         {
-            return "value";
+            var rt = "";
+            DBConnect dbconn = new DBConnect();
+            var i = dbconn.DBExec("DELETE FROM USERDATE WHERE ID = " + id);
+            
+            if(i == 1)
+            {
+                rt = "刪除成功";
+            }
+            else
+            {
+                rt = "刪除失敗";
+            }
+
+            return rt;
         }
     }
 }

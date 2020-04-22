@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Text;
 using System.Web.Http;
+using WebApplication1.Connect;
 
 namespace WebApplication1.Controllers
 {
@@ -16,9 +14,26 @@ namespace WebApplication1.Controllers
         }
 
         // GET api/<controller>/5
-        public string Get(string id,int age)
+        public string updateUser(string id, string mail)
         {
-            return "value";
+            var rt = "";
+            DBConnect dbconn = new DBConnect();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("UPDATE USERDATE");
+            sb.AppendLine("   SET mail" + mail);
+            sb.AppendLine(" WHERE id" + id);
+            var i = dbconn.DBExec(sb.ToString());
+
+            if (i == 1)
+            {
+                rt = "修改成功";
+            }
+            else
+            {
+                rt = "修改失敗";
+            }
+
+            return rt;
         }
     }
 }
