@@ -2,6 +2,7 @@
 using System.Text;
 using System.Web.Http;
 using WebApplication1.Connect;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
@@ -13,15 +14,21 @@ namespace WebApplication1.Controllers
             return new string[] { "value1", "value2" };
         }
 
-        // GET api/<controller>/5
-        public string updateUser(string id, string mail)
+        // PUT api/<controller>/5
+        public string Put(int id, [FromBody]UpdateModel data)
         {
             var rt = "";
+
+            if (data.mail == null)
+                rt = "資料不齊全";
+            
             DBConnect dbconn = new DBConnect();
             StringBuilder sb = new StringBuilder();
+
             sb.AppendLine("UPDATE USERDATE");
-            sb.AppendLine("   SET mail" + mail);
+            sb.AppendLine("   SET mail" + data.mail);
             sb.AppendLine(" WHERE id" + id);
+
             var i = dbconn.DBExec(sb.ToString());
 
             if (i == 1)
@@ -34,6 +41,7 @@ namespace WebApplication1.Controllers
             }
 
             return rt;
+
         }
     }
 }

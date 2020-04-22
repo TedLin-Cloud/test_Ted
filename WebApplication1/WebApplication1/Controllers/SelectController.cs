@@ -22,9 +22,12 @@ namespace WebApplication1.Controllers
         public string Get(string id)
         {
             var str_json = "";
+
             DBConnect dbconn = new DBConnect();
             StringBuilder sb = new StringBuilder();
+
             sb.AppendLine("SELECT * FROM USERDATE");
+
             var dt = dbconn.SqlQueryDt(sb.ToString());
             //將DataTable轉成JSON字串
             if (dt.Rows.Count == 0)

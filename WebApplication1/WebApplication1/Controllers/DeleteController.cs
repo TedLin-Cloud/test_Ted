@@ -13,7 +13,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET api/<controller>/5
-        public string deleteUser(string id)
+        public string Delete(string id)
         {
             var rt = "";
             DBConnect dbconn = new DBConnect();
